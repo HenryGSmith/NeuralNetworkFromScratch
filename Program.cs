@@ -10,9 +10,9 @@
 								 { -0.26, -0.27,  0.17,  0.87 }};
 			double[] biases = { 2, 3, 0.5 };
 
-			TestNeurone neurone1 = new TestNeurone(inputs, weights, biases[0]);
-			TestNeurone neurone2 = new TestNeurone(inputs, weights, biases[1]);
-			TestNeurone neurone3 = new TestNeurone(inputs, weights, biases[2]);
+			TestNeurone neurone1 = new TestNeurone(inputs, Utils.Utils.ConvertToJaggedArray(weights)[0], biases[0]);
+			TestNeurone neurone2 = new TestNeurone(inputs, Utils.Utils.ConvertToJaggedArray(weights)[1], biases[1]);
+			TestNeurone neurone3 = new TestNeurone(inputs, Utils.Utils.ConvertToJaggedArray(weights)[2], biases[2]);
 
 
 			double[] output = { neurone1.Output(), neurone2.Output(), neurone3.Output() };
@@ -20,14 +20,6 @@
 			{
 				Console.WriteLine(o);
 			}
-
-			double[,] d = new double[,] { { 1, 1, 1 }, { 2, 2, 2 } };
-			double[,] d2 = new double[,] { { 1, 1 }, { 2, 2 }, { 3, 3 } };
-			Utils.Matrix A = new Utils.Matrix(d);
-			Utils.Matrix B = new Utils.Matrix(d2);
-			A.Show();
-			B.Show();
-			A.Mul(B).Show();
 		}
 	}
 }
