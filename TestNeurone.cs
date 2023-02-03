@@ -23,7 +23,7 @@ namespace NeuralNetworkFromScratch
 		public double Output()
 		{
 			double weightedSum = 0;
-			for(int i = 0; i < inputs.Length; i++)
+			for (int i = 0; i < inputs.Length; i++)
 			{
 				weightedSum += inputs[i] * weights[i];
 			}

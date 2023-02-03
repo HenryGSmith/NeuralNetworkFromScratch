@@ -22,6 +22,14 @@
 			{
 				Console.WriteLine(o);
 			}
+
+			double[,] d = new double[,] { { 1, 1, 1 }, { 2, 2, 2 } };
+			double[,] d2 = new double[,] { { 1, 1 }, { 2, 2 }, { 3, 3 } };
+			Utils.Matrix A = new Utils.Matrix(d);
+			Utils.Matrix B = new Utils.Matrix(d2);
+			A.Show();
+			B.Show();
+			A.Mul(B).Show();
 		}
 	}
 }
