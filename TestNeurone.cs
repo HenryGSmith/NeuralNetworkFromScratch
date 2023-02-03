@@ -9,13 +9,25 @@ namespace NeuralNetworkFromScratch
 {
 	internal class TestNeurone
 	{
-		double[] inputs = { 1.2, 5.1, 2.1 };
-		double[] weights = { 3.1, 2.1, 8.7 };
-		double bias = 3;
+		private double[] inputs;
+		private double[] weights;
+		private double bias;
+
+		public TestNeurone(double[] inputs, double[] weights, double bias)
+		{
+			this.inputs = inputs;
+			this.weights = weights;
+			this.bias = bias;
+		}
 
 		public double Output()
 		{
-			return inputs[0] * weights[0] + inputs[1] * weights[1] + inputs[2] * weights[2] + bias;
+			double weightedSum = 0;
+			for(int i = 0; i < inputs.Length; i++)
+			{
+				weightedSum += inputs[i] * weights[i];
+			}
+			return weightedSum + bias;
 		}
 	}
 }
