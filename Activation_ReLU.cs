@@ -13,16 +13,7 @@ namespace NeuralNetworkFromScratch
 
 		public Matrix<double> Forward(Matrix<double> input)
 		{
-			Output = Matrix<double>.Build.Dense(input.ColumnCount, input.RowCount);
-
-			for(int i = 0; i < input.RowCount; i++)
-			{
-				for(int j = 0; j < input.ColumnCount; j++)
-				{
-					Output[j,i] = (input[i,j] > 0)? input[i,j]: 0;
-				}
-			}
-
+			Output = input.PointwiseMaximum(0);
 			return Output;
 		}
 	}

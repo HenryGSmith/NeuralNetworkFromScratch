@@ -15,8 +15,7 @@ namespace NeuralNetworkFromScratch
 								 { -1.50,  2.70,  3.30, -0.80 }});
 
 
-			Matrix<double> inputs = Matrix<double>.Build.DenseOfArray(
-				new double[,] { { 0, 2, -1, 3.3, -2.7, 1.1, 2.2, -100 } });
+			Matrix<double> inputs = spiral_data(100, 3);
 			Activation_ReLU reLU = new Activation_ReLU();
 			reLU.Forward(inputs);
 			Console.Write(reLU.Output.ToString());
@@ -31,7 +30,7 @@ namespace NeuralNetworkFromScratch
 		}
 
 		// standin dataset
-		Matrix<double> spiral_data(int points, int classes)
+		static Matrix<double> spiral_data(int points, int classes)
 		{
 			//Matrix<double> X;
 			//Vector<double> y;
