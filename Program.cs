@@ -8,13 +8,6 @@ namespace NeuralNetworkFromScratch
 	{
 		static void Main(string[] args)
 		{
-			// training data set
-			Matrix<double> X = DenseMatrix.OfArray(new double[,]
-								{{  1.00,  2.00,  3.00,  2.50 },
-								 {  2.00,  5.00, -1.00,  2.00 },
-								 { -1.50,  2.70,  3.30, -0.80 }});
-
-
 			Matrix<double> inputs = spiral_data(100, 3);
 			Activation_ReLU reLU = new Activation_ReLU();
 			reLU.Forward(inputs);
