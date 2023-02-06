@@ -6,25 +6,25 @@ namespace NeuralNetworkFromScratch
 {
 	internal class LayerDense
 	{
-		Matrix<double> weights;
-		double[] biases;
-		int nNeurons;
-
-		public Matrix<double> Output { get; private set; }
-
-		MatrixBuilder<double> M = Matrix<double>.Build;
+		public Matrix<double> weights { get; set; }
+		public Matrix<double> biases { get; set; }
+		public Matrix<double>? Output { get; private set; }
+		
+		private MatrixBuilder<double> M = Matrix<double>.Build;
+		private VectorBuilder<double> V = Vector<double>.Build;
 
 		public LayerDense(int nInputs, int nNeurons) 
 		{
 			weights = M.Random(nInputs, nNeurons) * 0.10;
-			biases = new double[nNeurons];
-			this.nNeurons = nNeurons;
+			biases = M.Dense(1, nNeurons);
 		}
 
 		public Matrix<double> Forward(Matrix<double> inputs)
-		{
-			Matrix<double> bias = M.Dense(inputs.RowCount, nNeurons, (i, j) => biases[j]);
-			Output = (inputs * weights) + bias;
+		{ 
+			Matrix<double> v = M.Dense(inputs.RowCount, 1, 1.0);
+			Matrix<double> biasMat = v * biases;
+
+			Output = inputs * weights + biasMat;
 			return Output;
 		}
 	}
