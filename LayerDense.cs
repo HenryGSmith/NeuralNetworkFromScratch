@@ -11,7 +11,6 @@ namespace NeuralNetworkFromScratch
 		public Matrix<double>? Output { get; private set; }
 		
 		private MatrixBuilder<double> M = Matrix<double>.Build;
-		private VectorBuilder<double> V = Vector<double>.Build;
 
 		public LayerDense(int nInputs, int nNeurons) 
 		{
