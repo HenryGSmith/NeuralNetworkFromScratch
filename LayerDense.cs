@@ -10,7 +10,7 @@ namespace NeuralNetworkFromScratch
 		double[] biases;
 		int nNeurons;
 
-		public Matrix<double> outputs { get; private set; }
+		public Matrix<double> Output { get; private set; }
 
 		MatrixBuilder<double> M = Matrix<double>.Build;
 
@@ -24,8 +24,8 @@ namespace NeuralNetworkFromScratch
 		public Matrix<double> Forward(Matrix<double> inputs)
 		{
 			Matrix<double> bias = M.Dense(inputs.RowCount, nNeurons, (i, j) => biases[j]);
-			outputs = (inputs * weights) + bias;
-			return outputs;
+			Output = (inputs * weights) + bias;
+			return Output;
 		}
 	}
 }
