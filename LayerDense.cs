@@ -10,11 +10,11 @@ namespace NeuralNetworkFromScratch
 		public Matrix<double> biases { get; set; }
 		public Matrix<double>? Output { get; private set; }
 		
-		private MatrixBuilder<double> M = Matrix<double>.Build;
+		private readonly MatrixBuilder<double> M = Matrix<double>.Build;
 
 		public LayerDense(int nInputs, int nNeurons) 
 		{
-			weights = M.Random(nInputs, nNeurons) * 0.10;
+			weights = M.Random(nInputs, nNeurons) * 0.010;
 			biases = M.Dense(1, nNeurons);
 		}
 

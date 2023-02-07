@@ -1,6 +1,7 @@
 ﻿using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.LinearAlgebra.Double;
+using System.Xml;
 
 namespace NeuralNetworkFromScratch
 {
@@ -8,22 +9,29 @@ namespace NeuralNetworkFromScratch
 	{
 		static void Main(string[] args)
 		{
-			Matrix<double> inputs = spiral_data(100, 3);
-			Activation_ReLU reLU = new Activation_ReLU();
-			reLU.Forward(inputs);
-			Console.Write(reLU.Output.ToString());
+			Vector<double> y;
+			Matrix<double> X = SpiralData(100, 3, out y);
 
-			/*
-			LayerDense l1 = new LayerDense(4,5);
-			LayerDense l2 = new LayerDense(5,2);
-			l1.Forward(X);
-			l2.Forward(l1.Outputs);
+			LayerDense dense1 = new(2, 3);
+			Activation_ReLU a1 = new();
 
-			Console.WriteLine(l2.Outputs.ToString());*/
+			LayerDense dense2 = new(3, 3);
+			Activation_SoftMax a2 = new();
+
+			dense1.Forward(X);
+			a1.Forward(dense1.Output);
+			dense2.Forward(a1.Output);
+			a2.Forward(dense2.Output);
+			
+			Console.WriteLine(a2.Output.ToString());
+
+			Loss_CategoricalCrossentropy lossFunc = new();
+			double loss = lossFunc.Calculate(a2.Output, y);
+			Console.WriteLine(loss);
 		}
 
 		// standin dataset
-		static Matrix<double> spiral_data(int points, int classes)
+		static Matrix<double> SpiralData(int points, int classes, out Vector<double> y)
 		{
 			//Matrix<double> X;
 			//Vector<double> y;
@@ -31,7 +39,7 @@ namespace NeuralNetworkFromScratch
 			var V = Vector<double>.Build; //shortcut to Vector builder
 
 			//build vectors of size points*classesx1 for y, r and theta
-			var y = V.Dense(points * classes); //at this point this is full of zeros
+			y = V.Dense(points * classes); //at this point this is full of zeros
 			for (int j = 0; j < classes; j++)
 			{
 				var y_step = V.DenseOfArray(Generate.Step(points * classes, 1, (j + 1) * points));
